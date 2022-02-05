@@ -1,0 +1,212 @@
+﻿
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@model IPagedList<_1262228_Arosh.Models.Student>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@*Mendatory*@
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<style>
+    th {
+        text-align: center
+    }
+
+    .c {
+        color: white;
+    }
+
+    .d {
+        border: 2px solid red;
+    }
+</style>
+
+<div>
+
+    <center> <input type="text" id="Search" placeholder="Search" class="form-control d" /></center>
+</div>
+<table class="table">
+    <tr style="font-size:11px;background-color:green;color:white;text-align:center">
+        <th>
+            @Html.ActionLink("Name", "Index", "Student", new { sortOrder = ViewBag.SortingName }, new { @class = "c" })
+        </th>
+        <th>
+            FatherName
+        </th>
+        <th>
+            MotherName
+        </th>
+        <th>
+            @Html.ActionLink("Gender", "Index", new { sortOrder = ViewBag.SortingGender }, new { @class = "c" })
+        </th>
+        <th>
+            DOB
+        </th>
+        <th>
+            Birth ID
+        </th>
+        <th>
+            Blood Group
+        </th>
+        <th>
+            @Html.ActionLink("Unit", "Index", new { sortOrder = ViewBag.SortingUnit }, new { @class = "c" })
+        </th>
+        <th style="text-align:center">
+            Email
+        </th>
+        <th>
+            Mobile
+        </th>
+        <th>
+            Status
+        </th>
+
+        <th>
+            Picture
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        var Photopath = "~/Images/" + (item.Picture ?? "noimage.jpg");
+        <tr class="Search">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FatherName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MotherName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BloodGroup)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobile)
+            </td>
+            <td>
+                @if (item.Status.Value)
+                {<text>Accepted</text>}
+            else
+            {<text>Pending</text>}
+            </td>
+            <td>
+                <img src="@Photopath" asp-append-version="true" width="50" height="50" />
+            </td>
+            <td style="width:200px; font-size:12px">
+                <a asp-action="Edit" asp-route-id="@item.StudentID" class="editDialog btn btn-warning btn-sm">Edit</a>
+                <a asp-action="Details" asp-controller="Admin" asp-route-id="@item.StudentID" class="DetailsDialog btn btn-info btn-sm">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.StudentID" class="DeleteDialog btn btn-danger btn-sm">Delete</a>
+
+            </td>
+        </tr>
+    }
+
+</table>
+<center>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</center>
+
+<script>
+    $(document).ready(function () {
+        $("#Add").click(function (event) {
+            event.preventDefault();
+            $.get(this.href, function (response) {
+                $(".divForAdd").html(response);
+
+            });
+            $("#Add-Modal").modal({
+                backdrop: "static",
+            }, 'show');
+        });
+
+        $(".editDialog").click(function (event) {
+            event.preventDefault();
+            $.get(this.href, function (response) {
+                $(".divForUpdate").html(response);
+
+            });
+            $("#Edit-Modal").modal({
+                backdrop: "static",
+            }, 'show');
+        });
+
+        $(".DetailsDialog").click(function (event) {
+            event.preventDefault();
+            $.get(this.href, function (response) {
+                $(".divForDetails").html(response);
+
+            });
+            $("#Details-Modal").modal({
+                backdrop: "static",
+            }, 'show');
+        });
+
+        $(".DeleteDialog").click(function (event) {
+            event.preventDefault();
+            $.get(this.href, function (response) {
+                $(".divForDelete").html(response);
+
+            });
+            $("#Delete-Modal").modal({
+                backdrop: "static",
+            }, 'show');
+        });
+
+
+
+
+
+    })
+</script>
+
+<script>
+    $(document).ready(function () {
+        function Contains(text_One, text_two) {
+            if (text_One.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchtext = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchtext)) {
+                    $(this).hide();
+
+
+                }
+                else {
+                    $(this).show();
+                }
+
+            });
+
+
+        });
+
+
+    });
+</script>
+
+
+

@@ -1,0 +1,87 @@
+﻿
+<div id="main-div">
+    <div class="container">
+        <br />
+        <a asp-action="Create" asp-controller="Student" id="Add" class="btn btn-primary"> ApplyNow</a>
+        <div id="div-record">
+
+            <partial name="/Views/Shared/_StudentDetails.cshtml">
+        </div>
+    </div>
+
+    <div class="modal" id="Add-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"> Apply Student</h4>
+                </div>
+                <div class="divForAdd">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal" id="Edit-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"> UPDATE STUDENT </h4>
+                </div>
+                <div class="divForUpdate">
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+    <div class="modal" id="Details-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabelDetails" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">STUDENT DETAILS </h4>
+                </div>
+                <div class="divForDetails">
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal" id="Delete-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Delete Student</h4>
+                </div>
+                <div class="divForDelete">
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

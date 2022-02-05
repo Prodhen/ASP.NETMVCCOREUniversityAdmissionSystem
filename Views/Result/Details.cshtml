@@ -1,0 +1,54 @@
+﻿@model _1262228_Arosh.Models.Result
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Result</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Bangla)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Bangla)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.English)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.English)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GeneralKnowlede)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GeneralKnowlede)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ict)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ict)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalMark)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TotalMark)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Student)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Student.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ResultID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,184 @@
+﻿@model _1262228_Arosh.ViewModels.StudentVM
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/jqueryajax/jquery.unobtrusive-ajax.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit" enctype="multipart/form-data" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="StudentID" />
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FatherName" class="control-label"></label>
+                        <input asp-for="FatherName" class="form-control" />
+                        <span asp-validation-for="FatherName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MotherName" class="control-label"></label>
+                        <input asp-for="MotherName" class="form-control" />
+                        <span asp-validation-for="MotherName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Gender" class="control-label"></label>
+                        @Html.DropDownList("Gender", new List<SelectListItem> {
+                        new SelectListItem{Text="Male",Value="Male"},
+                        new SelectListItem{Text="Female",Value="Female"}}, htmlAttributes: new { @class = "form-control" })
+
+
+
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DOB" class="control-label"></label>
+                        <input asp-for="DOB" class="form-control" />
+                        <span asp-validation-for="DOB" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BirthID" class="control-label"></label>
+                        <input asp-for="BirthID" class="form-control" />
+                        <span asp-validation-for="BirthID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BloodGroup" class="control-label"></label>
+                        @Html.DropDownList("BloodGroup", new List<SelectListItem> {
+                       new SelectListItem{Text="A+",Value="A+"},
+                       new SelectListItem{Text="A-",Value="A-"},
+                       new SelectListItem{Text="B+",Value="B+"},
+                       new SelectListItem{Text="B-",Value="B-"},
+                       new SelectListItem{Text="AB+",Value="AB+"},
+                        new SelectListItem{Text="AB-",Value="AB-"},
+                       new SelectListItem{Text="O-",Value="O-"},
+                       new SelectListItem{Text="O+",Value="O+"}}, htmlAttributes: new { @class = "form-control" })
+                        <span asp-validation-for="BloodGroup" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Unit" class="control-label"></label>
+                        @Html.DropDownList("Unit", new List<SelectListItem> {
+                        new SelectListItem{Text="A",Value="A"},
+                        new SelectListItem{Text="B",Value="B"},
+                        new SelectListItem{Text="C",Value="C"},
+                        new SelectListItem{Text="D",Value="D"}}, htmlAttributes: new { @class = "form-control" })
+                        <span asp-validation-for="Unit" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Mobile" class="control-label"></label>
+                        <input asp-for="Mobile" class="form-control" />
+                        <span asp-validation-for="Mobile" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Status" class="control-label"></label>
+
+
+                        @Html.DropDownList("Status", new List<SelectListItem> {
+                                new SelectListItem{Text="Accepted",Value="True"},
+                                new SelectListItem{Text="Pending",Value="False"}
+                                })
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Picture" class="control-label"></label>
+                        <input asp-for="UploadImage" accept="image/*" />
+                        <span asp-validation-for="Picture" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <table class="table table-responsive-lg" id="AcademicTable">
+                            <thead class="">
+                                <tr>
+                                    <th>
+                                        Roll_No
+                                    </th>
+                                    <th>
+                                        Examination
+                                    </th>
+
+                                    <th>Result</th>
+                                    <th>Group</th>
+                                    <th>Passing_Year</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @for (int i = 0; i < Model.AcademicResults.Count; i++)
+                                {
+                                    @Html.HiddenFor(model => model.AcademicResults[i].AcademicResultID)
+                                    @Html.HiddenFor(model => model.AcademicResults[i].StudentID)
+
+
+                                    <tr>
+
+
+
+                                        <td>
+
+                                            <input asp-for="@Model.AcademicResults[i].RollNo" class="form-control" />
+                                        </td>
+                                        <td>
+
+                                            <input asp-for="@Model.AcademicResults[i].Examination" class="form-control" />
+                                        </td>
+                                        <td>
+
+                                            <input asp-for="@Model.AcademicResults[i].Result" class="form-control" />
+                                        </td>
+                                        <td>
+
+                                            <input asp-for="@Model.AcademicResults[i].Group" class="form-control" />
+                                        </td>
+                                        <td>
+
+                                            <input asp-for="@Model.AcademicResults[i].PassingYear" class="form-control" />
+                                        </td>
+                                        <td>
+
+                                            <button id='btnadd-@i' type="button" class="btn btn-sm btn-secondary invisible" onclick="AddITem(this)">Add</button>
+                                            <button id='btnremove-@i' type="button" class="btn btn-sm btn-danger invisible" onclick="DeleteItem(this)">Delete</button>
+
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <input type="hidden" id="hdnLastIndex" value="0" />
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+<div>
+
+</div>
+
+<script src="~/Scripts/Master.js"></script>
